@@ -37,6 +37,10 @@ export class Usuario extends Entity {
     type: 'string',
   })
   password?: string;
+  static correo: any;
+  static apellidos: string;
+  static nombre: string;
+  static id: any;
 
 
   constructor(data?: Partial<Usuario>) {

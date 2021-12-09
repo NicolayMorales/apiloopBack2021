@@ -1,7 +1,7 @@
 import {Getter, inject} from '@loopback/core';
-import {DefaultCrudRepository, repository, BelongsToAccessor} from '@loopback/repository';
+import {BelongsToAccessor, DefaultCrudRepository, repository} from '@loopback/repository';
 import {MongoDataSource} from '../datasources';
-import {Ruta, RutaRelations, Aeropuerto} from '../models';
+import {Aeropuerto, Ruta, RutaRelations} from '../models';
 import {AeropuertoRepository} from './aeropuerto.repository';
 
 export class RutaRepository extends DefaultCrudRepository<

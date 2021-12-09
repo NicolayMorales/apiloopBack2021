@@ -1,23 +1,16 @@
-import {Getter, inject} from '@loopback/core';
-import {BelongsToAccessor, DefaultCrudRepository, repository} from '@loopback/repository';
+import {inject} from '@loopback/core';
+import {DefaultCrudRepository} from '@loopback/repository';
 import {MongoDataSource} from '../datasources';
-import {Aeropuerto, AeropuertoRelations, Ruta} from '../models';
-import {RutaRepository} from './ruta.repository';
+import {Aeropuerto, AeropuertoRelations} from '../models';
 
 export class AeropuertoRepository extends DefaultCrudRepository<
   Aeropuerto,
   typeof Aeropuerto.prototype.id,
   AeropuertoRelations
 > {
-
-  public readonly origen_aeropuerto: BelongsToAccessor<Ruta, typeof Aeropuerto.prototype.id>;
-
-  public readonly destino_aeropuerto: BelongsToAccessor<Ruta, typeof Aeropuerto.prototype.id>;
-
   constructor(
-    @inject('datasources.Mongo') dataSource: MongoDataSource, @repository.getter('RutaRepository') protected rutaRepositoryGetter: Getter<RutaRepository>,
+    @inject('datasources.mongo') dataSource: MongoDataSource,
   ) {
     super(Aeropuerto, dataSource);
-
   }
 }

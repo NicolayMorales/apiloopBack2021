@@ -1,9 +1,12 @@
-
 import {authenticate} from '@loopback/authentication';
 import {service} from '@loopback/core';
 import {
   Count,
-  CountSchema, Filter, FilterExcludingWhere, repository, Where
+  CountSchema,
+  Filter,
+  FilterExcludingWhere,
+  repository,
+  Where
 } from '@loopback/repository';
 import {
   del, get,
@@ -14,6 +17,7 @@ import axios from 'axios';
 import {Credenciales, Usuario} from '../models';
 import {UsuarioRepository} from '../repositories';
 import {AuthService} from '../services';
+
 @authenticate("admin")
 export class UsuarioController {
   constructor(
@@ -22,6 +26,7 @@ export class UsuarioController {
     @service(AuthService)
     public servicioAuth: AuthService
   ) { }
+
   @authenticate.skip()
   @post('/usuarios')
   @response(200, {
@@ -48,20 +53,17 @@ export class UsuarioController {
     let claveCifrada = this.servicioAuth.CifrarClave(clave);
     usuario.password = claveCifrada;
     let p = await this.usuarioRepository.create(usuario);
-    return p;
-
 
     // Notificamos al usuario por correo
     let destino = usuario.correo;
     // Notifiamos al usuario por telefono y cambiar la url por send_sms
-    // let destino = usuario.telefono;
+    //let destino = usuario.telefono;
 
     let asunto = 'Registro de usuario en plataforma';
     let contenido = `Hola, ${usuario.nombre} ${usuario.apellidos} su contraseña en el portal es: ${clave}`
     axios({
       method: 'post',
       url: 'http://localhost:5000/send_email', //Si quiero enviar por mensaje cambiar a send_sms
-
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -180,6 +182,7 @@ export class UsuarioController {
   async deleteById(@param.path.string('id') id: string): Promise<void> {
     await this.usuarioRepository.deleteById(id);
   }
+
   //Servicio de login
   @authenticate.skip()
   @post('/login', {
@@ -210,6 +213,4 @@ export class UsuarioController {
       throw new HttpErrors[401]("Datos invalidos")
     }
   }
-
-
 }

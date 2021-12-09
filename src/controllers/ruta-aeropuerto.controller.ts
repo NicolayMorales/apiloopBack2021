@@ -17,7 +17,7 @@ export class RutaAeropuertoController {
     public rutaRepository: RutaRepository,
   ) { }
 
-  @get('/rutas/{id}/aeropuerto', {
+  @get('/rutas/{id}/aeropuertos', {
     responses: {
       '200': {
         description: 'Aeropuerto belonging to Ruta',
@@ -29,7 +29,7 @@ export class RutaAeropuertoController {
       },
     },
   })
-  async getAeropuerto(
+  async getAeropuertos(
     @param.path.string('id') id: typeof Ruta.prototype.id,
   ): Promise<Aeropuerto> {
     return this.rutaRepository.destinoFk(id);

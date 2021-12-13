@@ -1,7 +1,7 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, BelongsToAccessor} from '@loopback/repository';
+import {Getter, inject} from '@loopback/core';
+import {BelongsToAccessor, DefaultCrudRepository, repository} from '@loopback/repository';
 import {MongoDataSource} from '../datasources';
-import {Vuelo, VueloRelations, Ruta} from '../models';
+import {Ruta, Vuelo, VueloRelations} from '../models';
 import {RutaRepository} from './ruta.repository';
 
 export class VueloRepository extends DefaultCrudRepository<
@@ -13,7 +13,7 @@ export class VueloRepository extends DefaultCrudRepository<
   public readonly rutaFk: BelongsToAccessor<Ruta, typeof Vuelo.prototype.id>;
 
   constructor(
-    @inject('datasources.Mongo') dataSource: MongoDataSource, @repository.getter('RutaRepository') protected rutaRepositoryGetter: Getter<RutaRepository>,
+    @inject('datasources.mongo') dataSource: MongoDataSource, @repository.getter('RutaRepository') protected rutaRepositoryGetter: Getter<RutaRepository>,
   ) {
     super(Vuelo, dataSource);
     this.rutaFk = this.createBelongsToAccessorFor('rutaFk', rutaRepositoryGetter,);

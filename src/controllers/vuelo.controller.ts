@@ -14,14 +14,14 @@ import {
 } from '@loopback/rest';
 import {Vuelo} from '../models';
 import {VueloRepository} from '../repositories';
-@authenticate("admin")
+@authenticate.skip()
 
 export class VueloController {
   constructor(
     @repository(VueloRepository)
     public vueloRepository: VueloRepository,
   ) { }
-
+  @authenticate.skip()
   @post('/vuelos')
   @response(200, {
     description: 'Vuelo model instance',

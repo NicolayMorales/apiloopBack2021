@@ -15,7 +15,7 @@ import {
 import {Aeropuerto} from '../models';
 import {AeropuertoRepository} from '../repositories';
 
-@authenticate("admin")
+
 export class AeropuertoController {
   constructor(
     @repository(AeropuertoRepository)
@@ -38,9 +38,9 @@ export class AeropuertoController {
         },
       },
     })
-    aeropuertos: Omit<Aeropuerto, 'id'>,
+    aeropuerto: Omit<Aeropuerto, 'id'>,
   ): Promise<Aeropuerto> {
-    return this.aeropuertoRepository.create(aeropuertos);
+    return this.aeropuertoRepository.create(aeropuerto);
   }
 
   @get('/aeropuertos/count')
@@ -85,10 +85,10 @@ export class AeropuertoController {
         },
       },
     })
-    aeropuertos: Aeropuerto,
+    aeropuerto: Aeropuerto,
     @param.where(Aeropuerto) where?: Where<Aeropuerto>,
   ): Promise<Count> {
-    return this.aeropuertoRepository.updateAll(aeropuertos, where);
+    return this.aeropuertoRepository.updateAll(aeropuerto, where);
   }
 
   @get('/aeropuertos/{id}')
@@ -144,4 +144,3 @@ export class AeropuertoController {
     await this.aeropuertoRepository.deleteById(id);
   }
 }
-

@@ -18,7 +18,7 @@ export class VueloRutaController {
     public vueloRepository: VueloRepository,
   ) { }
 
-  @get('/vuelos/{id}/ruta', {
+  @get('/vuelos/{id}/rutas', {
     responses: {
       '200': {
         description: 'Ruta belonging to Vuelo',

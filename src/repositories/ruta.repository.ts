@@ -10,6 +10,7 @@ export class RutaRepository extends DefaultCrudRepository<
   RutaRelations
 > {
 
+  public readonly origen_aeropuero: BelongsToAccessor<Aeropuerto, typeof Ruta.prototype.id>;
   public readonly origenFk: BelongsToAccessor<Aeropuerto, typeof Ruta.prototype.id>;
 
   public readonly destinoFk: BelongsToAccessor<Aeropuerto, typeof Ruta.prototype.id>;

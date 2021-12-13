@@ -8,6 +8,7 @@ export class Aeropuerto extends Entity {
     generated: true,
   })
   id?: string;
+
   @property({
     type: 'string',
     required: true,
@@ -49,6 +50,8 @@ export class Aeropuerto extends Entity {
     required: true,
   })
   tipo: string;
+
+
   constructor(data?: Partial<Aeropuerto>) {
     super(data);
   }
